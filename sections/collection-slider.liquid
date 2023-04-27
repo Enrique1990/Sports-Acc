@@ -1,0 +1,41 @@
+{% schema %}
+{
+  "name": "Colllection Slider",
+  "settings": [
+       {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "default": "Collection Feautured"
+  },
+       {
+      "type": "collection",
+      "id": "collection",
+      "label": "collection"
+  },
+    {
+      "type": "range",
+      "id": "product_count",
+      "min":4,
+      "max": 12,
+      "label": "Number of product to dosplay",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "category": "Collection",
+      "name": "Collection Slider",
+      "settings": {
+
+      }
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
