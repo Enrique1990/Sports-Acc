@@ -1,6 +1,6 @@
 {%- assign main_menu_linklist = linklists[section.settings.menu].links -%}
 
-<div class="relative bg-white" x-data="{ mobileMenuOpen: true }">
+<div class="relative bg-slate-200" x-data="{ mobileMenuOpen: true }">
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
@@ -78,22 +78,30 @@
         {% endfor %}
       </nav>
 
+      {% comment %} CART BUTTON / ACCOUNT LINKS IF ENABLED {% endcomment %}
       <div class="hidden md:flex items-center justify-end md:flex-1 space-x-5">
         <a href="{{ routes.cart_url }}" class="whitespace-nowrap text-base text-gray-500 hover:text-gray-900">
           {% render 'icon-shopping-bag' %}
         </a>
 
         {% if shop.customer_accounts_enabled %}
-        <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">
-          {% render 'icon-login' -%}
-        </a>
-        <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">
-          {% render 'icon-register-account' %}
+          {%- if costumer -%}
+            <a href="{{ routes.account_url }}" class="text-base text-gray-500 hover:text-gray-900">account</a>
+            {{ 'Log out' | customer_logout_link | replace: '<a', '<a class="text-base text-gray-500 hover:tex-gray-900"' }}
+            {%- else -%}
+              {{ 'Log in' | customer_login_link | replace: '<a', '<a class="text-base text-gray-500 hover:tex-gray-900"' }}
+                {{ 'Register' | customer_register_link | replace: '<a', '<a class="text-base text-gray-500 hover:tex-gray-900"' }}
+          {%- endif -%}
+        
+        
+          
         </a>
         {% endif %}
       </div>
     </div>
   </div>
+
+  {% comment %} MOBILE CONTAINER {% endcomment %}
   <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
     <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
       <div class="p-5 divide-y-2 divide-gray-50">
